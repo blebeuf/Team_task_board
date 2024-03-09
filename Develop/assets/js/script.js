@@ -40,12 +40,23 @@ function createTaskCard(task) {
 
     cardDeleteBtn.on('click', handleDeleteTask);
 
+    if (task.dueDate && task.status !== 'done') {
+        const now = dayjs();
+        const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+    
+        //  make the card yellow if it's due today. If it is overdue, make it the card red.
+        if (now.isSame(taskDueDate, 'day')) {
+          taskCard.addClass('bg-warning text-white');
+        } else if (now.isAfter(taskDueDate)) {
+          taskCard.addClass('bg-danger text-white');
+          cardDeleteBtn.addClass('border-light');
+        }
+    }
     taskCard.append(cardHeader, cardBody.append(cardDescription, cardDueDate, cardDeleteBtn));
 
     return taskCard;
+    
 }
-
-
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
@@ -69,7 +80,7 @@ function renderTaskList() {
             doneList.append(createTaskCard(task));
         }
     }
-// this is a refenece to the exmaple given in class regarding draggable function within jQuesry
+// this is a refenece to the exmaple given in class regarding draggable function within jQuery
     $('.draggable').draggable({
         opacity: 0.7,
         zIndex: 100,
@@ -158,6 +169,8 @@ $(document).ready(function () {
         drop: handleDrop,
     });
 });
+
+// setting up the event listener for the submission 
 
 taskFormEl.on('submit', handleAddTask);
 
