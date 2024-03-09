@@ -2,9 +2,21 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+const taskDisplayEl = $('#task-display');
+const taskFormEl = $('#task-form');
+const taskNameInputEl = $('task-name-input');
+const taskDateInputEl = $('taskDueDate');
+const taskDescriptionInputEl = $('task-description-input');
+
 const time = dayjs();
 function readTasksFromStorage(){
 let task = JSON.parse(localStorage.getItem('task'));
+
+$('#taskModal').modal('show');
+$('#taskModal').on('shown.bs.modal', function () {
+    console.log('Modal is now shown');
+    // You can also set focus to a specific element in the modal here
+  });
 
 if (!tasks){
     tasks = [];
@@ -83,6 +95,7 @@ function renderTaskList() {
 }
 
 // Todo: create a function to handle adding a new task
+
 function handleAddTask(event){
     event.preventDefault();
 
@@ -138,6 +151,12 @@ function handleDrop(event, ui) {
     localStorage.setItem('tasks', JSON.stringify(tasks))
     renderTaskList();
 }
+
+taskFormEl.on('submit', handleDeleteProject);
+
+taskDisplayEl.on('click', '.btn-delete-project', handleDeleteProject);
+
+
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
