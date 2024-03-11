@@ -17,7 +17,7 @@ There's no special installation for this web application. Visit the webiste and 
 
 ![Screenshot](https://github.com/blebeuf/Team_task_board/assets/23405383/e83c5d70-cc70-412d-b4a1-5fcc636fb523)
 
-please visit the site to give the task board a test: 
+please visit the site to give the task board a test: https://blebeuf.github.io/Team_task_board/
 
 ## Credits
 
